@@ -1,7 +1,0 @@
-numpy
-matplotlib
-seaborn
-Pillow
-opencv-python
-ipywidgets
-plotly
