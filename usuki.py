@@ -43,8 +43,6 @@ emin=0.00
 ne=70
 de=(emax-emin)/(ne-1)
 
-print(thop, nsl)
-
 bet = q * b * (a ** 2) / hbar
 
 # Matrices and arrays
@@ -77,18 +75,17 @@ phi1old = np.zeros((rows, rows), dtype=np.complex128)
 phi2old = np.zeros((rows, rows), dtype=np.complex128)
 
 for i in range((rows//2)-15, (rows//2)+15):
-    for j in range(nsl):
+    for j in range(nsl+1):
         pot[j, i] = 0.0
         pot[j, rows - i - 1] = 0.0
 
 # energy loop
 trans = 0.0
 #for ef in range(30,31):
-for ef in range(30,31):
+for ef in range(1,31):
 
     en=emin+ef*de
     ehop=en/thop
-    print(en,ehop)
 
     # Propagation through columns
     for i in range(rows):
@@ -114,11 +111,7 @@ for ef in range(30,31):
         for j in range(rows):
             Tl[i + rows, j + rows] = T22[i, j]
 
-    np.savetxt("Tl.txt",Tl)
     evals, evec = np.linalg.eig(Tl)
-    #print(abs(evals[np.argsort(-abs(evals))]))
-    #evals=evals[np.argsort(-abs(evals))]
-    #evec=evec[np.argsort(-abs(evals)),:]
 # Preallocate arrays
     xp = np.zeros(rows)
     xpe = np.zeros(rows)
@@ -161,12 +154,10 @@ for ef in range(30,31):
                 ipv[ip] = j
                 xp[ip] = rk
                 ip += 1
-                print('ip', rk, vf, cur[j], rnorm[j], j)
             else:
                 imv[im] = j
                 xm[im] = rk
                 im += 1
-                print('im', rk, vf, cur[j], rnorm[j], j)
 
         elif x < 0.9999:
             ipev[ipe] = j
@@ -199,7 +190,6 @@ for ef in range(30,31):
     for j in range(ip):
         idx = ipv[j]
         vel[j] = cur[idx] / rnorm[idx]
-        print(idx, vel[j])
 
         rkval = xp[j] / dely
         evalp = ehop * thop - (rkval) ** 2.0 / angfac
@@ -219,7 +209,6 @@ for ef in range(30,31):
     # Negative propagating modes
     for j in range(im):
         idx = imv[j]
-        print(idx, vel[j])
         for i in range(rows):
             um[i, j] = evec[i, idx] / np.sqrt(delx * delx * rnorm[idx])
             uml[i, j] = evec[i + rows, idx] / np.sqrt(delx * delx * rnorm[idx])
@@ -239,7 +228,6 @@ for ef in range(30,31):
         p2i = np.linalg.inv(c2l1)
         d1l1 = -d2l1 @ upl
         c1l1 = up - c2l1 @ upl
-        np.savetxt("evec.txt",evec)
         iii = 0
         for ii in range(1, nsl + 1):  
             istart = ii
