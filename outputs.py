@@ -1,10 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
-#USING SEABORN/WITHOUT PLOTLY
 import numpy as np
 import os
 import seaborn as sns
@@ -168,10 +161,3 @@ video_writer.release()
 for filename in filenames_combined:
     os.remove(filename)
 os.rmdir(frames_folder)
-
-
-# In[ ]:
-
-
-
-
