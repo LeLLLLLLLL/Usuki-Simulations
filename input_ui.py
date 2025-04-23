@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import numpy as np
 import math
 import cmath
@@ -581,10 +575,3 @@ class TransportSimulation:
 
 app = TransportSimulation()
 app.layout
-
-
-# In[ ]:
-
-
-
-
