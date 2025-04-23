@@ -165,11 +165,10 @@ class TransportSimulation:
                     f.write(f"{x_grid[ix, iy]:.6f} {y_grid[ix, iy]:.6f} {self.potential_vals[ix, iy]:.6f}\n")
 
         x_range = xmax - xmin
-        y_range = ymax - ymin
         z_range = self.potential_vals.max() - self.potential_vals.min()
         aspect_ratio = dict(
-            x=1,
-            y=x_range/y_range,
+            x=x_range/4000,
+            y=1,
             z=0.15*z_range
         )
         fig = go.Figure(data=[
