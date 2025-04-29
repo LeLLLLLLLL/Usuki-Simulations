@@ -6,7 +6,6 @@ from PIL import Image
 import matplotlib.ticker as ticker
 import cv2
 import imageio
-import re
 
 frames_folder = "frames"
 os.makedirs(frames_folder, exist_ok=True)
