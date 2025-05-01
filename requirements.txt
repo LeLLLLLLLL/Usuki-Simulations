@@ -1,5 +1,8 @@
 numpy
+plotly
+ipywidgets
 seaborn
 matplotlib
 Pillow
 opencv-python
+imageio
